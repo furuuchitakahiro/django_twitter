@@ -1,0 +1,22 @@
+version: "3"
+services:
+  api:
+    build: ./api
+    container_name: "mytwitter-api"
+    volumes:
+      - ./api:/usr/src/app
+    ports:
+      - "8000:8000"
+    command: sh -c "cd mytwitter && python manage.py runserver 0.0.0.0:8000"
+    links:
+      - db:db
+    tty: true
+    stdin_open: true
+  db:
+    build: ./db
+    container_name: "mytwitter-db"
+    volumes:
+      - ./db/datadir:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=ohJ8BohpOoL4aeK9
+      - MYSQL_DATABASE=dev_mytwitter_db
