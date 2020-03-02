@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from .models import Tweet
+from .serializers import TweetSerializer
+
+
+class TweetViewSet(viewsets.ModelViewSet):
+    queryset = Tweet.objects.all()
+    lookup_field = 'slug'
+    serializer_class = TweetSerializer

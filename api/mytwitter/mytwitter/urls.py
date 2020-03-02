@@ -2,11 +2,13 @@ from django.contrib import admin
 from django.conf import settings
 from django.urls import path, include
 from rest_framework import routers
-
 import debug_toolbar
+
+from tweets.views import TweetViewSet
 
 
 router = routers.DefaultRouter(trailing_slash=False)
+router.register('tweets', TweetViewSet)
 
 urlpatterns = [
     path('api/', include(router.urls)),
