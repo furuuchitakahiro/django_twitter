@@ -9,4 +9,4 @@ class TweetAdmin(admin.ModelAdmin):
 
     """
 
-    # list_display = ('name', 'workflow', 'slug')
+    list_display = ('__str__', 'slug', 'updated_at', 'created_at',)
