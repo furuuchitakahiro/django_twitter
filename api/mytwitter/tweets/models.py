@@ -2,7 +2,8 @@ from typing import ClassVar
 from enum import Enum, unique
 
 from django.db import models
-from django.contrib.auth.models import User
+
+from mytwitter.utils import generate_uniq_slug
 
 
 @unique
@@ -36,7 +37,7 @@ class Tweet(models.Model):
 
     tweeter = models.ForeignKey(
         verbose_name='ツイート主',
-        to=User,
+        to='mytwitter_users.User',
         on_delete=models.CASCADE
     )
     body = models.TextField(verbose_name='本文')
@@ -50,3 +51,17 @@ class Tweet(models.Model):
 
     def __str__(self) -> str:
         return self.slug
+
+    @classmethod
+    def _pre_save_handler(cls, sender, instance, raw, **kwargs):
+        """保存直前処理
+
+        """
+        is_create: bool = instance.id is None
+
+        # 作成時処理
+        if is_create:
+            if instance.slug == '' or instance.slug is None:
+                instance.slug = generate_uniq_slug(
+                    cls, 'slug', length=cls.SLUG_LENGTH
+                )

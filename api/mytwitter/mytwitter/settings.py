@@ -17,6 +17,11 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+# Auth model setting
+
+AUTH_USER_MODEL = 'mytwitter_users.User'
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -31,6 +36,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'corsheaders',
 
+    'mytwitter_users',
     'tweets',
 ]
 
