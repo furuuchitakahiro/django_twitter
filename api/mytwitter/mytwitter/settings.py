@@ -148,7 +148,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PARSER_CLASSES': (
         'djangorestframework_camel_case.parser.CamelCaseJSONParser',
     ),
-    # 'DEFAULT_PAGINATION_CLASS': 'anyflow.pagenations.AnyflowPagination',
+    'DEFAULT_PAGINATION_CLASS': 'mytwitter.paginations.MyTwitterPagination',
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),

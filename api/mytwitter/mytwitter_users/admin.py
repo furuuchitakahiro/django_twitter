@@ -7,7 +7,9 @@ from mytwitter_users.models import User
 @admin.register(User)
 class UserAdmin(_UserAdmin):
     fieldsets = (
-        (None, {'fields': ('username', 'password', 'slug')}),
+        (None, {'fields': (
+            'username', 'password', 'slug', 'followee', 'follower'
+        )}),
         (_('Personal info'), {'fields': ('email',)}),
         (_('Permissions'), {'fields': (
             'is_active',
@@ -34,4 +36,4 @@ class UserAdmin(_UserAdmin):
         'slug',
     )
     search_fields = ('username', 'email')
-    filter_horizontal = ('groups', 'user_permissions')
+    filter_horizontal = ('groups', 'user_permissions', 'followee', 'follower')
