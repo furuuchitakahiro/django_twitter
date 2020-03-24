@@ -22,8 +22,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     SLUG_LENGTH = 20
     objects = UserManager()
 
-    followee = models.ManyToManyField(to='User', related_name='followees')
-    follower = models.ManyToManyField(to='User', related_name='followers')
+    followee = models.ManyToManyField(
+        to='User', related_name='followees', blank=True
+    )
+    follower = models.ManyToManyField(
+        to='User', related_name='followers', blank=True
+    )
 
     username = models.CharField(
         verbose_name=_('username'), max_length=150, blank=True

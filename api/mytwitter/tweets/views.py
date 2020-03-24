@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.settings import api_settings
 
 from .models import Tweet
 from .serializers import (
@@ -7,11 +8,17 @@ from .serializers import (
     UpdateTweetSerializer,
     ListReadTweetSerializer,
 )
+from .permissions import PublishStatePermission
 
 
 class TweetViewSet(viewsets.ModelViewSet):
     queryset = Tweet.objects.all()
     lookup_field = 'slug'
+
+    permission_classes = [
+        *api_settings.DEFAULT_PERMISSION_CLASSES,
+        PublishStatePermission
+    ]
 
     def get_serializer_class(self):
         serializer_class = ReadTweetSerializer  # retrive
